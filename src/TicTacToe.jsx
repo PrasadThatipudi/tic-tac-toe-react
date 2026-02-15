@@ -2,8 +2,6 @@ import React from "react";
 import Players from "./Players";
 import Cells from "./Cells";
 
-const debug = (arg) => console.log(arg) || arg;
-
 class TicTacToe extends React.Component {
   constructor(props) {
     super(props);
@@ -44,40 +42,28 @@ class TicTacToe extends React.Component {
     );
   }
 
-  horizontal(cells, symbol) {
-    const possibilities = [
+  isPlayerWon(cells, playerSymbol) {
+    const horizontal = [
       [0, 1, 2],
       [3, 4, 5],
       [6, 7, 8],
     ];
 
-    return this.checkPossibility(possibilities, cells, symbol);
-  }
-
-  vertical(cells, symbol) {
-    const possibilities = [
+    const vertical = [
       [0, 3, 6],
       [1, 4, 7],
       [2, 5, 8],
     ];
 
-    return this.checkPossibility(possibilities, cells, symbol);
-  }
-
-  cross(cells, symbol) {
-    const possibilities = [
+    const cross = [
       [0, 4, 8],
       [2, 4, 6],
     ];
 
-    return this.checkPossibility(possibilities, cells, symbol);
-  }
+    const winningPossibilities = [horizontal, vertical, cross];
 
-  isPlayerWon(cells, playerSymbol) {
-    return (
-      this.horizontal(cells, playerSymbol) ||
-      this.vertical(cells, playerSymbol) ||
-      this.cross(cells, playerSymbol)
+    return winningPossibilities.some((possibilities) =>
+      this.checkPossibility(possibilities, cells, playerSymbol),
     );
   }
 
