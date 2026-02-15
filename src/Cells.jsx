@@ -1,19 +1,19 @@
 const Cell = ({ value, onClick, cellIndex }) => (
   <div
     style={{ border: "1px solid black", width: "100px", aspectRatio: 1 }}
-    onClick={() => onClick(cellIndex)}
+    onClick={onClick ? () => onClick(cellIndex) : null}
   >
     {value}
   </div>
 );
 
-const Cells = ({ cells, onClick }) => {
+const Cells = ({ cells, onClick, isGameOver }) => {
   const cellElements = cells.map((value, index) => (
     <Cell
       value={value}
       key={index}
       cellIndex={index}
-      onClick={value === "" ? onClick : null}
+      onClick={value != "" || isGameOver ? null : onClick}
     />
   ));
 

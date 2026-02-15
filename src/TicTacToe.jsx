@@ -1,6 +1,7 @@
 import React from "react";
 import Players from "./Players";
 import Cells from "./Cells";
+import GameOverPopUp from "./GameOverPopUp";
 
 class TicTacToe extends React.Component {
   constructor(props) {
@@ -68,12 +69,15 @@ class TicTacToe extends React.Component {
   }
 
   render() {
-    return this.state.isGameOver ? (
-      alert("Game is over")
-    ) : (
+    return (
       <div>
         <Players players={this.state.players} />
-        <Cells cells={this.state.cells} onClick={this.handleClick} />
+        <Cells
+          cells={this.state.cells}
+          onClick={this.handleClick}
+          isGameOver={this.state.isGameOver}
+        />
+        {this.state.isGameOver ? <GameOverPopUp /> : null}
       </div>
     );
   }
