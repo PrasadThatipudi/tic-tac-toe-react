@@ -25,7 +25,7 @@ const Cells = ({ cells, onClick }) => {
         flexWrap: "wrap",
         textAlign: "center",
         lineHeight: 3.4,
-        fontSize: "34px",
+        fontSize: "28px",
         margin: "0 auto",
       }}
     >
