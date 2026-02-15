@@ -9,7 +9,12 @@ const Cell = ({ value, onClick, cellIndex }) => (
 
 const Cells = ({ cells, onClick }) => {
   const cellElements = cells.map((value, index) => (
-    <Cell value={value} key={index} cellIndex={index} onClick={onClick} />
+    <Cell
+      value={value}
+      key={index}
+      cellIndex={index}
+      onClick={value === "" ? onClick : null}
+    />
   ));
 
   return (
