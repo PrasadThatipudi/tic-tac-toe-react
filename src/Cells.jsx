@@ -1,12 +1,15 @@
-const Cell = ({ value }) => (
-  <div style={{ border: "1px solid black", width: "100px", aspectRatio: 1 }}>
+const Cell = ({ value, onClick, cellIndex }) => (
+  <div
+    style={{ border: "1px solid black", width: "100px", aspectRatio: 1 }}
+    onClick={() => onClick(cellIndex)}
+  >
     {value}
   </div>
 );
 
-const Cells = ({ cells }) => {
+const Cells = ({ cells, onClick }) => {
   const cellElements = cells.map((value, index) => (
-    <Cell value={value} key={index} />
+    <Cell value={value} key={index} cellIndex={index} onClick={onClick} />
   ));
 
   return (
