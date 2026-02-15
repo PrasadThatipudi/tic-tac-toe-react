@@ -38,30 +38,30 @@ class TicTacToe extends React.Component {
     });
   }
 
-  groupOf(array, limit) {
-    const arrayCopy = array.slice();
-    const arrayGroups = [];
-
-    while (arrayCopy[0] !== undefined) {
-      arrayGroups.push(arrayCopy.splice(0, limit));
-    }
-
-    return arrayGroups;
-  }
-
-  horizontal(cells, symbol) {
-    return this.groupOf(cells, 3).some((row) =>
-      row.every((value) => value === symbol),
+  checkPossibility(possibilities, cells, symbol) {
+    return possibilities.some((possibility) =>
+      possibility.every((index) => cells[index] === symbol),
     );
   }
 
-  vertical(cells, symbol) {
-    const groups = [[], [], []];
-    cells.forEach((cellValue, index) => {
-      groups[index % 3].push(cellValue);
-    });
+  horizontal(cells, symbol) {
+    const possibilities = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+    ];
 
-    return groups.some((row) => row.every((value) => value === symbol));
+    return this.checkPossibility(possibilities, cells, symbol);
+  }
+
+  vertical(cells, symbol) {
+    const possibilities = [
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+    ];
+
+    return this.checkPossibility(possibilities, cells, symbol);
   }
 
   cross(cells, symbol) {
@@ -70,9 +70,7 @@ class TicTacToe extends React.Component {
       [2, 4, 6],
     ];
 
-    return possibilities.some((possibility) =>
-      possibility.every((index) => cells[index] === symbol),
-    );
+    return this.checkPossibility(possibilities, cells, symbol);
   }
 
   isPlayerWon(cells, playerSymbol) {
