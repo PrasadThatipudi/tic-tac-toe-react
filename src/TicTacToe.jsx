@@ -2,6 +2,7 @@ import React from "react";
 import Players from "./Players";
 import Cells from "./Cells";
 import GameOverPopUp from "./GameOverPopUp";
+import RestartButton from "./RestartButton";
 
 class TicTacToe extends React.Component {
   constructor(props) {
@@ -18,6 +19,11 @@ class TicTacToe extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.isPlayerWon = this.isPlayerWon.bind(this);
+    this.resetGame = this.resetGame.bind(this);
+  }
+
+  resetGame() {
+    this.setState({ cells: Array(9).fill(""), isGameOver: false });
   }
 
   getCurrentPlayerSymbol() {
@@ -77,7 +83,12 @@ class TicTacToe extends React.Component {
           onClick={this.handleClick}
           isGameOver={this.state.isGameOver}
         />
-        {this.state.isGameOver ? <GameOverPopUp /> : null}
+        {this.state.isGameOver ? (
+          <div>
+            <GameOverPopUp />
+            <RestartButton onClick={this.resetGame} />
+          </div>
+        ) : null}
       </div>
     );
   }
