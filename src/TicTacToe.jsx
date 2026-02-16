@@ -13,7 +13,7 @@ class TicTacToe extends React.Component {
         { name: "Bob", symbol: "O" },
       ],
       currentPlayerIndex: 0,
-      cells: ["", "", "", "", "", "", "", "", ""],
+      cells: Array(9).fill(""),
       isGameOver: false,
     };
 
