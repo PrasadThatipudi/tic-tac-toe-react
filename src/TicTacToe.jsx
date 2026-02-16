@@ -8,10 +8,6 @@ class TicTacToe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      players: [
-        { name: "Alice", symbol: "X" },
-        { name: "Bob", symbol: "O" },
-      ],
       currentPlayerIndex: 0,
       cells: Array(9).fill(""),
       isGameOver: false,
@@ -23,11 +19,15 @@ class TicTacToe extends React.Component {
   }
 
   resetGame() {
-    this.setState({ cells: Array(9).fill(""), isGameOver: false });
+    this.setState({
+      cells: Array(9).fill(""),
+      isGameOver: false,
+      currentPlayerIndex: 0,
+    });
   }
 
   getCurrentPlayerSymbol() {
-    return this.state.players[this.state.currentPlayerIndex].symbol;
+    return this.props.players[this.state.currentPlayerIndex].symbol;
   }
 
   handleClick(cellIndex) {
@@ -77,7 +77,7 @@ class TicTacToe extends React.Component {
   render() {
     return (
       <div>
-        <Players players={this.state.players} />
+        <Players players={this.props.players} />
         <Cells
           cells={this.state.cells}
           onClick={this.handleClick}
